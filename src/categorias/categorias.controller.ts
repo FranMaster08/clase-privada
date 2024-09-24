@@ -17,7 +17,8 @@ import {
 import { CategoriasService } from './categorias.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
-import { Categoria } from './entities/categoria.entity';
+import { Categorias as Categoria } from '../shared/entities/Categorias.entity';
+import { CategoriasResponseDto } from './dto/response/categoria-response.dto';
 
 @ApiTags('categorías') // Agrupa los endpoints bajo la categoría 'categorias' en la documentación de Swagger
 @Controller('categorias')
@@ -33,7 +34,7 @@ export class CategoriasController {
   @ApiResponse({
     status: 201,
     description: 'Categoría creada exitosamente',
-    type: Categoria,
+    type: CategoriasResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Datos inválidos' })
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
@@ -45,7 +46,7 @@ export class CategoriasController {
   @ApiResponse({
     status: 200,
     description: 'Lista de categorías obtenida correctamente',
-    type: [Categoria],
+    type: [CategoriasResponseDto],
   })
   findAll() {
     return this.categoriasService.findAll();
@@ -57,7 +58,7 @@ export class CategoriasController {
   @ApiResponse({
     status: 200,
     description: 'Categoría encontrada',
-    type: Categoria,
+    type: CategoriasResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Categoría no encontrada' })
   findOne(@Param('id') id: string) {

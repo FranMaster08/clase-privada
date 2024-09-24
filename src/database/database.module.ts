@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DB_PASSWORD || 'fran',
       database: process.env.DB_NAME || 'herramientas_db',
       entities: [__dirname + '/../**/*.entity{.ts,.js}'], // Indica las entidades
-      synchronize: true, // Para desarrollo, sincroniza el esquema de base de datos
+      synchronize: false, // Para desarrollo, sincroniza el esquema de base de datos
     }),
   ],
 })

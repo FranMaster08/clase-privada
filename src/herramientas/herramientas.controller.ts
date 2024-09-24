@@ -17,7 +17,7 @@ import {
 import { HerramientasService } from './herramientas.service';
 import { CreateHerramientaDto } from './dto/create-herramienta.dto';
 import { UpdateHerramientaDto } from './dto/update-herramienta.dto';
-import { Herramienta } from './entities/herramienta.entity';
+import { Herramientas as Herramienta } from '../shared/entities/Herramientas.entity';
 
 @ApiTags('herramientas') // Agrupa los endpoints bajo la etiqueta 'herramientas' en la documentación de Swagger
 @Controller('herramientas')
