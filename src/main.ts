@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
@@ -11,6 +11,23 @@ async function bootstrap() {
       whitelist: true, // Remueve propiedades que no están definidas en los DTOs
     }),
   );
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        brokers: ['kafka:9092'],
+      },
+      consumer: {
+        groupId: 'my-group-id',
+      },
+      subscribe: {
+        fromBeginning: true,
+      },
+    },
+  });
+
+  await app.startAllMicroservices().catch((err) => console.log(err));
 
   // Configuración de Swagger para documentar la API
   const config = new DocumentBuilder()
